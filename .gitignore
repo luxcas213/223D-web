@@ -396,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/enviroment
+/enviroment
+enviroment/Lib/site-packages/_distutils_hack/__init__.py
+/enviroment/Lib/site-packages/_distutils_hack
+/enviroment/Lib
+/enviroment
