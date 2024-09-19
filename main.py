@@ -8,10 +8,8 @@ import modelo as fn
 
 app = FastAPI()
 
-# Montar la carpeta 'static' para servir archivos estáticos
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# Modelo de datos para la solicitud POST
 class Matrices(BaseModel):
     size: int
     matriz1: List[List[bool]]

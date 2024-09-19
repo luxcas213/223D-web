@@ -4,16 +4,23 @@
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>garba es un genio</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="\static\styles.css">
 </head>
 <body>
+    <header>
+        <nav>
+            <button onclick="window.location.href='https://ejemplo1.com'" class="header-button">Boton 1</button>
+            <button onclick="window.location.href='https://ejemplo2.com'" class="header-button">Boton 2</button>
+            <button onclick="window.location.href='https://ejemplo3.com'" class="header-button">Boton 3</button>
+        </nav>
+    </header>
     <h1>proyectooooooo</h1>
     <form id="formulario">
         <label for="size"> Size de la matriz (n x n):</label>
         <input type="number" id="size" name="size" min="1" max="10" required>
         <div class="wrapper">
             <button type="button" onclick="crearMatrices()">
-                Crear Matrices
+            Crear Matrices
             </button>
         </div>
         <h2>Matriz 1</h2>
@@ -27,12 +34,12 @@
         <div class="botones-container">
             <div class="wrapper">
                 <button type="button" onclick="enviarDatos()">
-                    Enviar
+                Enviar
                 </button>
             </div>
             <div class="wrapper">
                 <button type="button" onclick="descargarSTL()">
-                    Descargar STL
+                Descargar STL
                 </button>
             </div>
         </div>
