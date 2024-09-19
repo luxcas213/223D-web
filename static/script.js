@@ -1,3 +1,13 @@
+let isMouseDown = false;
+
+document.body.onmousedown = function () {
+    isMouseDown = true;
+};
+
+document.body.onmouseup = function () {
+    isMouseDown = false;
+};
+
 function crearMatrices() {
     const size = document.getElementById("size").value;
     generarMatriz('matriz1', size);
@@ -20,26 +30,45 @@ function descargarSTL() {
         })
         .catch(error => console.error('Error al descargar el STL:', error));
 }
+
 function generarMatriz(matrizId, size) {
     const matrizDiv = document.getElementById(matrizId);
-    matrizDiv.innerHTML = '';  
-    
+    matrizDiv.innerHTML = '';
+
     for (let i = 0; i < size; i++) {
         const fila = document.createElement('div');
-        fila.classList.add('fila'); // Agregar clase a cada fila
-        
+        fila.classList.add('fila');
+
         for (let j = 0; j < size; j++) {
-            const input = document.createElement('input');
-            input.type = 'checkbox';
-            input.checked = true;
-            input.name = `${matrizId}[${i}][${j}]`;
-            input.classList.add('checkbox'); // Agregar clase a cada checkbox
-            fila.appendChild(input);
+            const cuadro = document.createElement('div');
+            cuadro.classList.add('cuadro');
+            cuadro.dataset.checked = 'true';
+
+            cuadro.addEventListener('mousedown', function () {
+                toggleCuadro(cuadro);
+            });
+
+            cuadro.addEventListener('mouseover', function () {
+                if (isMouseDown) {
+                    toggleCuadro(cuadro);
+                }
+            });
+
+            fila.appendChild(cuadro);
         }
         matrizDiv.appendChild(fila);
     }
 }
 
+function toggleCuadro(cuadro) {
+    if (cuadro.dataset.checked === 'true') {
+        cuadro.dataset.checked = 'false';
+        cuadro.classList.add('checked');
+    } else {
+        cuadro.dataset.checked = 'true';
+        cuadro.classList.remove('checked');
+    }
+}
 
 function enviarDatos() {
     const size = document.getElementById("size").value;
@@ -68,25 +97,27 @@ function enviarDatos() {
 
 function obtenerMatriz(matrizId, size) {
     const matriz = [];
-    for (let i = 0; i < size; i++) {
-        const fila = [];
-        for (let j = 0; j < size; j++) {
-            const checkbox = document.querySelector(`input[name="${matrizId}[${i}][${j}]"]`);
-            fila.push(checkbox.checked ? true : false);
-        }
-        matriz.push(fila);
-    }
+    const filas = document.querySelectorAll(`#${matrizId} .fila`);
+    filas.forEach(fila => {
+        const filaMatriz = [];
+        fila.querySelectorAll('.cuadro').forEach(cuadro => {
+            filaMatriz.push(cuadro.dataset.checked === 'true');
+        });
+        matriz.push(filaMatriz);
+    });
     return matriz;
 }
+
 function cargarSTL() {
     const viewer = document.getElementById('viewer');
-    viewer.innerHTML = '';  
+    viewer.innerHTML = '';
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, viewer.clientWidth / viewer.clientHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(viewer.clientWidth, viewer.clientHeight);
     viewer.appendChild(renderer.domElement);
+
     const light = new THREE.DirectionalLight(0xffffff, 1);
     light.position.set(1, 1, 1).normalize();
     scene.add(light);
@@ -103,7 +134,7 @@ function cargarSTL() {
         controls.enableZoom = true;
 
         animate();
-        
+
         function animate() {
             requestAnimationFrame(animate);
             renderer.render(scene, camera);

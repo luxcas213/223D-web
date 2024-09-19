@@ -1,3 +1,19 @@
+.fila {
+    display: flex;
+}
+
+.cuadro {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    border: 1px solid #333;
+    margin: 2px;
+    cursor: pointer;
+}
+
+.cuadro.checked {
+    background-color: white;
+}
 
 #viewer {
     width: 700px;
@@ -5,12 +21,14 @@
     border: 1px solid rgb(0, 0, 0);
     margin: auto;
 }
+
 .textomedio {
     text-align: center;
     font-family: Arial, sans-serif;
     color: #ffffff;
 }
-#formulario{
+
+#formulario {
     width: 40%;
     height: 100%;
     margin: auto;
@@ -23,39 +41,35 @@
     text-align: center;
 }
 
-
 .botones-container {
     display: flex;
     justify-content: center;
-    gap: 10px; 
+    gap: 10px;
 }
 
-button{
-    width:150px;
-    height:50px;
+button {
+    width: 150px;
+    height: 50px;
     background-color: blue;
     border-style: none;
     border-radius: 5px;
-    color:#fff;
+    color: #fff;
     font-size: 23px;
     letter-spacing: 3px;
     font-family: 'Lato';
     font-weight: 600;
     cursor: pointer;
-    position: relative;
-    padding: 0px;
-    overflow: hidden;
+    padding: 0;
     transition: all .5s;
     margin: 5px;
 }
-button:hover{
+
+button:hover {
     transition: all .5s;
     transform: rotate(-3deg) scale(1.1);
     box-shadow: 0px 3px 5px rgba(0,0,0,.4);
     background-color: blueviolet;
 }
-
-
 
 header {
     display: flex;
@@ -65,13 +79,10 @@ header {
     padding: 1px;
 }
 
-
 .header-button {
     color: white;
     border: none;
     padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;

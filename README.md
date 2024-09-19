@@ -6,6 +6,8 @@ para activar:
 enviroment\Scripts\activate   
 ```
 
+
+
 para correr:
 ```bash
 uvicorn main:app --reload
